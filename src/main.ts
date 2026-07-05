@@ -1,12 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
-import { AppModule } from './app.module';
+import { DEFAULT_PORT } from './constant';
+import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
   const configService = await app.get(ConfigService);
-  const port = configService.get<number>('PORT') || 3000;
+  const port = configService.get<number>('PORT') || DEFAULT_PORT;
   const service =
     configService.get<string>('SERVICE_HOST') ?? 'USER_SERVICE_HOST';
 
