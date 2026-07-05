@@ -4,6 +4,7 @@ import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class AppMicroservice {
+  //todo fix name service
   constructor(private readonly appService: AppService) {}
 
   @MessagePattern({ method: 'GET', path: 'get_user_by_id' })
