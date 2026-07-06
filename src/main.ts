@@ -1,8 +1,9 @@
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
-import { ConfigService } from '@nestjs/config';
-import { DEFAULT_PORT } from './constant';
+
 import { AppModule } from './app/app.module';
+import { DEFAULT_PORT } from './constant';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
