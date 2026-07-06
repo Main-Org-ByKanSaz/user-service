@@ -1,22 +1,36 @@
 import { Controller } from '@nestjs/common';
-import { AppService } from './users.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { UserService } from './users.service';
+import { IUser } from './entities/user-entity';
 
 @Controller()
-export class AppMicroservice {
-  //todo fix name service
-  constructor(private readonly appService: AppService) {}
+export class UserMicroservice {
+  constructor(private readonly userService: UserService) {}
 
   @MessagePattern({ method: 'GET', path: 'get_user_by_id' })
-  getUserById(@Payload() payload: { userId: string }): Promise<any> {
-    return this.appService.getUserById(payload.userId);
+  async getUserById(
+    @Payload() payload: { userId: string },
+  ): Promise<IUser | null> {
+    const user = await this.userService.getUserById(payload.userId);
+    if (!user) {
+      console.log(`payload: ${payload} error: user not found`);
+    }
+
+    return user ?? null;
   }
 
   @MessagePattern({
     method: 'GET',
     path: 'get_user_by_username',
   })
-  getUserByUserName(@Payload() payload: { username: string }): Promise<any> {
-    return this.appService.getUserByUserName(payload.username);
+  async getUserByUserName(
+    @Payload() payload: { username: string },
+  ): Promise<IUser | null> {
+    const user = await this.userService.getUserByUserName(payload.username);
+    if (!user) {
+      console.log(`payload: ${payload} error: user not found`);
+    }
+
+    return user ?? null;
   }
 }
