@@ -27,6 +27,8 @@ async function bootstrap() {
   console.log(`${service} HTTP is running on port ${port}`);
 
   await app.startAllMicroservices();
-  console.log(`${service} is listening on Redis ${redis.host}:${redis.port}`);
+  await app.listen(port, async () => {
+    console.log(`${service} port: ${port}`);
+  });
 }
 void bootstrap();
