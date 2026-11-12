@@ -14,6 +14,7 @@ export class UserMicroservice {
   ): Promise<IUser | null> {
     const user = await this.userService.getUserById(payload.userId);
     if (!user) {
+      //TODO remove log
       console.log(`payload: ${JSON.stringify(payload)} error: user not found`);
     }
 
@@ -29,6 +30,7 @@ export class UserMicroservice {
   ): Promise<IUser | null> {
     const user = await this.userService.getUserByUserName(payload.username);
     if (!user) {
+      //TODO remove log
       console.log(`payload: ${JSON.stringify(payload)} error: user not found`);
     }
 
