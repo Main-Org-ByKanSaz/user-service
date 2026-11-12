@@ -23,7 +23,6 @@ async function bootstrap() {
 
   // Open the port first, so the host sees the service as up even while it is
   // still connecting to Redis.
-  await app.listen(port, '0.0.0.0');
   console.log(`${service} HTTP is running on port ${port}`);
 
   await app.startAllMicroservices();
